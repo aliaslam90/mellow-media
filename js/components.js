@@ -402,9 +402,71 @@ const Scatter = ({ items }) => (
   </>
 );
 
+// Fixed-position disco balls that fall from the navbar when the hero exits the viewport.
+// `balls` = array of { left: '10%', size: 130, delay: 0, dropDist: '72vh' }
+const FallingBalls = ({ balls, onDone }) => {
+  const { useEffect: ue } = React;
+  const reduce = typeof window !== 'undefined'
+    && window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  ue(() => {
+    if (reduce) { onDone && onDone(); return; }
+    const maxDelay = Math.max(...balls.map(b => (b.delay || 0)));
+    const totalMs = (maxDelay + 3000);
+    const t = setTimeout(() => onDone && onDone(), totalMs);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (reduce) return null;
+
+  return (
+    <>
+      {balls.map((b, i) => (
+        <div key={i} style={{
+          position: 'fixed',
+          top: 90,  /* below navbar */
+          left: b.left,
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
+          pointerEvents: 'none',
+          width: b.size,
+          '--drop-dist': b.dropDist || '72vh',
+          animation: `ballFadeOut ${(b.delay || 0) / 1000 + 3}s forwards`,
+          animationDelay: `${b.delay || 0}ms`,
+        }}>
+          {/* String — stretches as ball falls */}
+          <div style={{
+            width: 2, height: 80, background: 'linear-gradient(to bottom, rgba(92,61,30,0.5), rgba(58,38,24,0.7))',
+            margin: '0 auto',
+            animation: `stringStretch ${(b.delay || 0) / 1000 + 3}s forwards`,
+            animationDelay: `${b.delay || 0}ms`,
+            transformOrigin: 'top center',
+          }} />
+          {/* Ball — drops then squishes on each bounce */}
+          <div style={{
+            animation: `ballDrop ${(b.delay || 0) / 1000 + 3}s forwards`,
+            animationDelay: `${b.delay || 0}ms`,
+            '--drop-dist': b.dropDist || '72vh',
+            transformOrigin: 'center bottom',
+          }}>
+            <div style={{
+              animation: `ballSquish ${(b.delay || 0) / 1000 + 3}s forwards`,
+              animationDelay: `${b.delay || 0}ms`,
+              transformOrigin: 'center bottom',
+            }}>
+              <DiscoBall size={b.size} scrollY={0} stringLength={0} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
 Object.assign(window, {
   GroovyFlower, Daisy, Sparkle, StarSparkle, Mushroom,
-  WavyStripes, WavyArches, WavyDivider, DiscoBall, BrandBadge, PostCard,
+  WavyStripes, WavyArches, WavyDivider, DiscoBall, BrandBadge, PostCard, FallingBalls,
   IconMail, IconCalendar, IconSparkleStroke, IconChevron,
   IconInstagram, IconTikTok, IconLinkedIn, Scatter,
 });

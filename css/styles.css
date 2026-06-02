@@ -140,6 +140,35 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Disco ball drop + bounce animation */
+@keyframes ballDrop {
+  0%   { transform: translateY(0); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  58%  { transform: translateY(var(--drop-dist, 72vh)); animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  72%  { transform: translateY(calc(var(--drop-dist, 72vh) - 56px)); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  83%  { transform: translateY(var(--drop-dist, 72vh)); animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  91%  { transform: translateY(calc(var(--drop-dist, 72vh) - 22px)); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  96%  { transform: translateY(var(--drop-dist, 72vh)); animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  99%  { transform: translateY(calc(var(--drop-dist, 72vh) - 6px)); }
+  100% { transform: translateY(var(--drop-dist, 72vh)); }
+}
+@keyframes ballSquish {
+  0%,58%,72%,83%,91%,96%,100% { transform: scaleX(1) scaleY(1); }
+  60%  { transform: scaleX(1.28) scaleY(0.72); }
+  74%  { transform: scaleX(1.14) scaleY(0.86); }
+  85%  { transform: scaleX(1.06) scaleY(0.94); }
+}
+@keyframes ballFadeOut {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes stringStretch {
+  0%   { transform: scaleY(1); transform-origin: top center; }
+  58%  { transform: scaleY(8); transform-origin: top center; }
+  65%  { transform: scaleY(0.5); transform-origin: top center; }
+  100% { transform: scaleY(1); transform-origin: top center; }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
