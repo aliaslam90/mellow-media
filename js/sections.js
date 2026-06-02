@@ -134,6 +134,39 @@ const Hero = ({ scrollY }) => {
       overflow: 'hidden',
       background: 'linear-gradient(180deg, #FBDCE3 0%, #FFE7C2 50%, #FBC2A4 100%)',
     }}>
+      {/* Horizontal retro wave bands — full width */}
+      <svg
+        viewBox="0 0 1440 800"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.78 }}
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="band1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#F29DB5" />
+            <stop offset="100%" stopColor="#EA829A" />
+          </linearGradient>
+          <linearGradient id="band2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#FBC2A4" />
+            <stop offset="100%" stopColor="#F78762" />
+          </linearGradient>
+          <linearGradient id="band3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#FFE7C2" />
+            <stop offset="100%" stopColor="#E9BE6A" />
+          </linearGradient>
+        </defs>
+        {/* Three soft, lazy waves stacked from top to bottom */}
+        <path d="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z" fill="url(#band1)" opacity="0.55" />
+        <path d="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z" fill="url(#band2)" opacity="0.5" />
+        <path d="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z" fill="url(#band3)" opacity="0.55" />
+      </svg>
+
+      {/* Soft top-edge fade so nav blends in */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 160,
+        background: 'linear-gradient(180deg, #FFE7C2 0%, transparent 100%)',
+        opacity: 0.7, pointerEvents: 'none',
+      }} aria-hidden="true" />
 
       {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
       {!isNarrow && (
