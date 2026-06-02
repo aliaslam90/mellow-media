@@ -155,10 +155,10 @@ const Hero = ({ scrollY }) => {
             <stop offset="100%" stopColor="#E9BE6A" />
           </linearGradient>
         </defs>
-        {/* Three soft, lazy waves stacked from top to bottom */}
-        <path d="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z" fill="url(#band1)" opacity="0.55" />
-        <path d="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z" fill="url(#band2)" opacity="0.5" />
-        <path d="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z" fill="url(#band3)" opacity="0.55" />
+        {/* Three soft, lazy waves — each animates at a different speed for depth */}
+        <path className="wave-layer-1" d="M -80 200 C 240 130, 540 270, 820 200 S 1280 130, 1560 210 L 1560 290 C 1280 360, 820 240, 540 320 S 240 250, -80 290 Z" fill="url(#band1)" opacity="0.55" />
+        <path className="wave-layer-2" d="M -80 420 C 260 360, 560 480, 860 410 S 1280 350, 1560 430 L 1560 510 C 1280 580, 860 470, 560 540 S 260 480, -80 510 Z" fill="url(#band2)" opacity="0.5" />
+        <path className="wave-layer-3" d="M -80 640 C 260 580, 560 700, 860 630 S 1280 570, 1560 650 L 1560 800 L -80 800 Z" fill="url(#band3)" opacity="0.55" />
       </svg>
 
       {/* Soft top-edge fade so nav blends in */}

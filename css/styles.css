@@ -140,6 +140,35 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Hero wave animations — soft, slow, layered */
+@keyframes waveDrift1 {
+  0%   { transform: translateX(0px); }
+  50%  { transform: translateX(-36px); }
+  100% { transform: translateX(0px); }
+}
+@keyframes waveDrift2 {
+  0%   { transform: translateX(0px); }
+  50%  { transform: translateX(28px); }
+  100% { transform: translateX(0px); }
+}
+@keyframes waveDrift3 {
+  0%   { transform: translateX(0px); }
+  50%  { transform: translateX(-18px); }
+  100% { transform: translateX(0px); }
+}
+.wave-layer-1 {
+  animation: waveDrift1 18s ease-in-out infinite;
+  will-change: transform;
+}
+.wave-layer-2 {
+  animation: waveDrift2 24s ease-in-out infinite;
+  will-change: transform;
+}
+.wave-layer-3 {
+  animation: waveDrift3 14s ease-in-out infinite;
+  will-change: transform;
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
