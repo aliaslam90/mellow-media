@@ -134,20 +134,37 @@ const Hero = ({ scrollY }) => {
       overflow: 'hidden',
       background: 'linear-gradient(180deg, #FBDCE3 0%, #FFE7C2 50%, #FBC2A4 100%)',
     }}>
-      {/* Horizontal retro wave bands — full width */}
-      <svg
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-        aria-hidden="true"
-      >
-        {/* Wave band 1 — pink, top */}
-        <path className="wave-layer-1" d="M -80 160 C 240 80, 540 240, 820 160 S 1280 70, 1560 170 L 1560 340 C 1280 290, 820 220, 540 290 S 240 240, -80 310 Z" fill="#EA829A" opacity="0.9" />
-        {/* Wave band 2 — peach/coral, middle */}
-        <path className="wave-layer-2" d="M -80 390 C 260 310, 560 460, 860 390 S 1280 310, 1560 400 L 1560 570 C 1280 530, 860 460, 560 520 S 260 470, -80 530 Z" fill="#F78762" opacity="0.85" />
-        {/* Wave band 3 — mustard, bottom */}
-        <path className="wave-layer-3" d="M -80 590 C 200 510, 500 660, 800 580 S 1200 500, 1560 600 L 1560 900 L -80 900 Z" fill="#E9BE6A" opacity="0.8" />
-      </svg>
+      {/* Continuously flowing wave bands — double-copy seamless infinite scroll */}
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }} aria-hidden="true">
+
+        {/* Wave 1 — pink, top band */}
+        <div className="wave-scroll-1" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
+          {[0,1].map(i => (
+            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
+              <path d="M 0,210 C 90,130 270,130 360,210 S 630,290 720,210 S 990,130 1080,210 S 1350,290 1440,210 L 1440,360 C 1350,440 990,440 720,360 S 270,280 0,360 Z" fill="#EA829A" opacity="0.92" />
+            </svg>
+          ))}
+        </div>
+
+        {/* Wave 2 — coral, middle band */}
+        <div className="wave-scroll-2" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
+          {[0,1].map(i => (
+            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
+              <path d="M 0,420 C 100,340 300,340 440,420 S 720,500 880,420 S 1140,340 1280,420 S 1440,500 1440,420 L 1440,580 C 1340,660 1040,660 720,580 S 260,500 0,580 Z" fill="#F78762" opacity="0.88" />
+            </svg>
+          ))}
+        </div>
+
+        {/* Wave 3 — mustard, bottom fills to floor */}
+        <div className="wave-scroll-3" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
+          {[0,1].map(i => (
+            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
+              <path d="M 0,610 C 120,530 360,530 480,610 S 760,690 960,610 S 1200,530 1440,610 L 1440,900 L 0,900 Z" fill="#E9BE6A" opacity="0.85" />
+            </svg>
+          ))}
+        </div>
+
+      </div>
 
       {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
       {!isNarrow && (
