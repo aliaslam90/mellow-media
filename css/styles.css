@@ -140,21 +140,21 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hero — continuous wave scroll (double-copy seamless loop) */
-@keyframes waveScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* Hero waves — bob in place at different speeds */
+@keyframes waveBob {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-28px); }
 }
-.wave-scroll-1 {
-  animation: waveScroll 22s linear infinite;
+.wave-bob-1 {
+  animation: waveBob 7s ease-in-out infinite;
   will-change: transform;
 }
-.wave-scroll-2 {
-  animation: waveScroll 30s linear infinite 1.5s;
+.wave-bob-2 {
+  animation: waveBob 9s ease-in-out infinite 2.2s;
   will-change: transform;
 }
-.wave-scroll-3 {
-  animation: waveScroll 16s linear infinite 3s;
+.wave-bob-3 {
+  animation: waveBob 6s ease-in-out infinite 4.4s;
   will-change: transform;
 }
 

@@ -134,37 +134,26 @@ const Hero = ({ scrollY }) => {
       overflow: 'hidden',
       background: 'linear-gradient(180deg, #FBDCE3 0%, #FFE7C2 50%, #FBC2A4 100%)',
     }}>
-      {/* Continuously flowing wave bands — double-copy seamless infinite scroll */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }} aria-hidden="true">
-
-        {/* Wave 1 — pink, top band */}
-        <div className="wave-scroll-1" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
-          {[0,1].map(i => (
-            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
-              <path d="M 0,210 C 90,130 270,130 360,210 S 630,290 720,210 S 990,130 1080,210 S 1350,290 1440,210 L 1440,360 C 1350,440 990,440 720,360 S 270,280 0,360 Z" fill="#EA829A" opacity="0.92" />
-            </svg>
-          ))}
-        </div>
-
-        {/* Wave 2 — coral, middle band */}
-        <div className="wave-scroll-2" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
-          {[0,1].map(i => (
-            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
-              <path d="M 0,420 C 100,340 300,340 440,420 S 720,500 880,420 S 1140,340 1280,420 S 1440,500 1440,420 L 1440,580 C 1340,660 1040,660 720,580 S 260,500 0,580 Z" fill="#F78762" opacity="0.88" />
-            </svg>
-          ))}
-        </div>
-
-        {/* Wave 3 — mustard, bottom fills to floor */}
-        <div className="wave-scroll-3" style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '100%', display: 'flex' }}>
-          {[0,1].map(i => (
-            <svg key={i} viewBox="0 0 1440 900" preserveAspectRatio="none" style={{ width: '50%', height: '100%' }}>
-              <path d="M 0,610 C 120,530 360,530 480,610 S 760,690 960,610 S 1200,530 1440,610 L 1440,900 L 0,900 Z" fill="#E9BE6A" opacity="0.85" />
-            </svg>
-          ))}
-        </div>
-
-      </div>
+      {/* Three wave bands, each bobbing at a different speed */}
+      <svg
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+        aria-hidden="true"
+      >
+        {/* Pink — top, fills down */}
+        <path className="wave-bob-1"
+          d="M 0,210 C 120,130 360,130 480,210 C 600,290 840,290 960,210 C 1080,130 1320,130 1440,210 L 1440,900 L 0,900 Z"
+          fill="#EA829A" opacity="0.9" />
+        {/* Coral — middle, covers bottom of pink */}
+        <path className="wave-bob-2"
+          d="M 0,420 C 160,355 360,355 540,420 C 720,485 920,485 1080,420 C 1240,355 1380,355 1440,420 L 1440,900 L 0,900 Z"
+          fill="#F78762" opacity="0.88" />
+        {/* Mustard — bottom, covers bottom of coral */}
+        <path className="wave-bob-3"
+          d="M 0,630 C 180,565 420,565 600,630 C 780,695 1020,695 1200,630 C 1320,565 1400,565 1440,630 L 1440,900 L 0,900 Z"
+          fill="#E9BE6A" opacity="0.85" />
+      </svg>
 
       {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
       {!isNarrow && (
