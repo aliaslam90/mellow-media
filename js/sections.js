@@ -136,37 +136,18 @@ const Hero = ({ scrollY }) => {
     }}>
       {/* Horizontal retro wave bands — full width */}
       <svg
-        viewBox="0 0 1440 800"
+        viewBox="0 0 1440 900"
         preserveAspectRatio="xMidYMid slice"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.78 }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         aria-hidden="true"
       >
-        <defs>
-          <linearGradient id="band1" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#F29DB5" />
-            <stop offset="100%" stopColor="#EA829A" />
-          </linearGradient>
-          <linearGradient id="band2" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FBC2A4" />
-            <stop offset="100%" stopColor="#F78762" />
-          </linearGradient>
-          <linearGradient id="band3" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FFE7C2" />
-            <stop offset="100%" stopColor="#E9BE6A" />
-          </linearGradient>
-        </defs>
-        {/* Three soft, lazy waves — each animates at a different speed for depth */}
-        <path className="wave-layer-1" d="M -80 200 C 240 130, 540 270, 820 200 S 1280 130, 1560 210 L 1560 290 C 1280 360, 820 240, 540 320 S 240 250, -80 290 Z" fill="url(#band1)" opacity="0.55" />
-        <path className="wave-layer-2" d="M -80 420 C 260 360, 560 480, 860 410 S 1280 350, 1560 430 L 1560 510 C 1280 580, 860 470, 560 540 S 260 480, -80 510 Z" fill="url(#band2)" opacity="0.5" />
-        <path className="wave-layer-3" d="M -80 640 C 260 580, 560 700, 860 630 S 1280 570, 1560 650 L 1560 800 L -80 800 Z" fill="url(#band3)" opacity="0.55" />
+        {/* Wave band 1 — pink, top */}
+        <path className="wave-layer-1" d="M -80 160 C 240 80, 540 240, 820 160 S 1280 70, 1560 170 L 1560 340 C 1280 290, 820 220, 540 290 S 240 240, -80 310 Z" fill="#EA829A" opacity="0.9" />
+        {/* Wave band 2 — peach/coral, middle */}
+        <path className="wave-layer-2" d="M -80 390 C 260 310, 560 460, 860 390 S 1280 310, 1560 400 L 1560 570 C 1280 530, 860 460, 560 520 S 260 470, -80 530 Z" fill="#F78762" opacity="0.85" />
+        {/* Wave band 3 — mustard, bottom */}
+        <path className="wave-layer-3" d="M -80 590 C 200 510, 500 660, 800 580 S 1200 500, 1560 600 L 1560 900 L -80 900 Z" fill="#E9BE6A" opacity="0.8" />
       </svg>
-
-      {/* Soft top-edge fade so nav blends in */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 160,
-        background: 'linear-gradient(180deg, #FFE7C2 0%, transparent 100%)',
-        opacity: 0.7, pointerEvents: 'none',
-      }} aria-hidden="true" />
 
       {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
       {!isNarrow && (
