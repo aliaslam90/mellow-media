@@ -140,21 +140,25 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hero waves — bob in place at different speeds */
-@keyframes waveBob {
+/* Hero waves — alternating bob: odd layers up, even layer down */
+@keyframes waveBobUp {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-28px); }
+  50%       { transform: translateY(-30px); }
+}
+@keyframes waveBobDown {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(30px); }
 }
 .wave-bob-1 {
-  animation: waveBob 7s ease-in-out infinite;
+  animation: waveBobUp   7s ease-in-out infinite;
   will-change: transform;
 }
 .wave-bob-2 {
-  animation: waveBob 9s ease-in-out infinite 2.2s;
+  animation: waveBobDown 9s ease-in-out infinite;
   will-change: transform;
 }
 .wave-bob-3 {
-  animation: waveBob 6s ease-in-out infinite 4.4s;
+  animation: waveBobUp   6s ease-in-out infinite;
   will-change: transform;
 }
 
