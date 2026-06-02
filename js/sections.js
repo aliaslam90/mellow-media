@@ -134,26 +134,6 @@ const Hero = ({ scrollY }) => {
       overflow: 'hidden',
       background: 'linear-gradient(180deg, #FBDCE3 0%, #FFE7C2 50%, #FBC2A4 100%)',
     }}>
-      {/* Three wave bands, each bobbing at a different speed */}
-      <svg
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-        aria-hidden="true"
-      >
-        {/* Pink — top, fills down */}
-        <path className="wave-bob-1"
-          d="M 0,210 C 120,130 360,130 480,210 C 600,290 840,290 960,210 C 1080,130 1320,130 1440,210 L 1440,900 L 0,900 Z"
-          fill="#EA829A" opacity="0.9" />
-        {/* Coral — middle, covers bottom of pink */}
-        <path className="wave-bob-2"
-          d="M 0,420 C 160,355 360,355 540,420 C 720,485 920,485 1080,420 C 1240,355 1380,355 1440,420 L 1440,900 L 0,900 Z"
-          fill="#F78762" opacity="0.88" />
-        {/* Mustard — bottom, covers bottom of coral */}
-        <path className="wave-bob-3"
-          d="M 0,630 C 180,565 420,565 600,630 C 780,695 1020,695 1200,630 C 1320,565 1400,565 1440,630 L 1440,900 L 0,900 Z"
-          fill="#E9BE6A" opacity="0.85" />
-      </svg>
 
       {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
       {!isNarrow && (
