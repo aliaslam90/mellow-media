@@ -168,40 +168,8 @@ const Hero = ({ scrollY }) => {
         opacity: 0.7, pointerEvents: 'none',
       }} aria-hidden="true" />
 
-      {/* Smaller disco ball — upper left (hidden on mobile to keep things tidy) */}
-      {!isNarrow && (
-        <div style={{
-          position: 'absolute',
-          top: 124,
-          left: isMid ? '9%' : '10%',
-          transform: 'translateX(-50%)',
-          zIndex: 3,
-          pointerEvents: 'none',
-        }}>
-          <DiscoBall
-            size={isMid ? 110 : 130}
-            scrollY={scrollY}
-            dropMax={50}
-            stringLength={isMid ? 80 : 100}
-          />
-        </div>
-      )}
-
-      {/* Main hanging disco ball — right side, slightly lower */}
-      <div style={{
-        position: 'absolute',
-        top: 124,
-        left: isNarrow ? '50%' : isMid ? '90%' : '91%',
-        transform: 'translateX(-50%)',
-        zIndex: 3,
-        pointerEvents: 'none',
-      }}>
-        <DiscoBall
-          size={ballSize}
-          scrollY={scrollY}
-          stringLength={isNarrow ? 60 : 120}
-        />
-      </div>
+      {/* Hanging disco balls now rendered globally from App so they stay attached
+          to the navbar on scroll — see HangingBalls in app.js */}
 
       {/* Decorative motifs — flowers and sparkles only, tastefully placed */}
       <GroovyFlower size={isNarrow ? 32 : 56} v={1}
