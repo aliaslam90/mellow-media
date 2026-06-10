@@ -380,6 +380,46 @@ const Hero = ({ scrollY }) => {
   );
 };
 
+// ============== COUNT-UP WIDGET ==============
+const CountUp = ({ end, suffix = '', duration = 1400 }) => {
+  const [count, setCount] = useState(0);
+  const elRef   = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = elRef.current;
+    if (!el) return;
+
+    const run = () => {
+      if (started.current) return;
+      started.current = true;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setCount(end);
+        return;
+      }
+
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        setCount(Math.round(eased * end));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) run(); },
+      { threshold: 0.6 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return <span ref={elRef}>{count}{suffix}</span>;
+};
+
 // ============== ABOUT ==============
 const About = () => {
   return (
@@ -495,11 +535,11 @@ const About = () => {
             marginTop: 36, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16,
           }} className="about-facts">
             {[
-              { k: '6 yrs', v: 'in social' },
-              { k: '40+', v: 'brands grown' },
-              { k: '1', v: 'human (no bots)' },
+              { end: 6,  suffix: ' yrs', v: 'in social' },
+              { end: 40, suffix: '+',    v: 'brands grown' },
+              { end: 1,  suffix: '',     v: 'human (no bots)' },
             ].map((f) => (
-              <div key={f.k} style={{
+              <div key={f.v} style={{
                 padding: '18px 18px',
                 background: 'rgba(242, 157, 181, 0.18)',
                 border: '1.5px solid rgba(234, 130, 154, 0.45)',
@@ -509,7 +549,7 @@ const About = () => {
                   fontSize: 30, fontWeight: 800, color: 'var(--burnt-orange)', lineHeight: 1,
                   fontStyle: 'italic',
                 }}>
-                  {f.k}
+                  <CountUp end={f.end} suffix={f.suffix} />
                 </div>
                 <div style={{ marginTop: 4, fontSize: 13, fontWeight: 700, color: 'var(--brown-mid)' }}>
                   {f.v}
