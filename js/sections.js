@@ -116,6 +116,8 @@ const Nav = ({ scrolled }) => {
 // ============== HERO (editorial full-width collage) ==============
 const Hero = ({ scrollY }) => {
   const [vw, setVw] = useState(typeof window !== 'undefined' ? window.innerWidth : 1280);
+  // SMIL animations are not stopped by CSS `animation: none`, so we check the OS
+  // preference here and skip rendering <animate> entirely when reduced motion is on.
   const [reducedMotion, setReducedMotion] = useState(
     typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false
   );
@@ -143,7 +145,7 @@ const Hero = ({ scrollY }) => {
       overflow: 'hidden',
       background: 'linear-gradient(180deg, #FBDCE3 0%, #FFE7C2 50%, #FBC2A4 100%)',
     }}>
-      {/* Horizontal retro wave bands — animated, full width */}
+      {/* Horizontal retro wave bands — shape-morphing edges only, no positional movement */}
       <svg
         viewBox="0 0 1440 800"
         preserveAspectRatio="xMidYMid slice"
@@ -165,44 +167,67 @@ const Hero = ({ scrollY }) => {
           </linearGradient>
         </defs>
 
-        {/* Pink wave — flows left → right at 22s (extra copies only rendered when animating) */}
-        <g style={{ willChange: reducedMotion ? 'auto' : 'transform' }}>
-          <path d="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z" fill="url(#band1)" opacity="0.55" />
-          {!reducedMotion && (
-            <>
-              <path d="M 1390 200 C 1680 130, 1980 270, 2260 200 S 2720 130, 2940 210 L 2940 290 C 2720 360, 2260 240, 1980 320 S 1680 250, 1390 290 Z" fill="url(#band1)" opacity="0.55" />
-              <path d="M 2830 200 C 3120 130, 3420 270, 3700 200 S 4160 130, 4380 210 L 4380 290 C 4160 360, 3700 240, 3420 320 S 3120 250, 2830 290 Z" fill="url(#band1)" opacity="0.55" />
-              <animateTransform attributeName="transform" type="translate"
-                from="-1440,0" to="0,0" dur="22s" repeatCount="indefinite" calcMode="linear" />
-            </>
-          )}
-        </g>
+        {/*
+          Each path morphs between two nearly-identical shapes.
+          Only the Bezier control points shift slightly up/down — the anchor
+          points and overall position stay the same, so the band never slides.
+          Same command count + types in both keyframes = smooth SMIL interpolation.
+          The CSS prefers-reduced-motion block in styles.css stops these automatically.
+        */}
 
-        {/* Orange/peach wave — flows right → left at 26s */}
-        <g style={{ willChange: reducedMotion ? 'auto' : 'transform' }}>
-          <path d="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z" fill="url(#band2)" opacity="0.5" />
+        {/* Pink wave — edges breathe gently, 10s cycle */}
+        <path
+          d="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z"
+          fill="url(#band1)" opacity="0.55"
+        >
           {!reducedMotion && (
-            <>
-              <path d="M 1390 420 C 1700 360, 2000 480, 2300 410 S 2720 350, 2940 430 L 2940 510 C 2720 580, 2300 470, 2000 540 S 1700 480, 1390 510 Z" fill="url(#band2)" opacity="0.5" />
-              <path d="M 2830 420 C 3140 360, 3440 480, 3740 410 S 4160 350, 4380 430 L 4380 510 C 4160 580, 3740 470, 3440 540 S 3140 480, 2830 510 Z" fill="url(#band2)" opacity="0.5" />
-              <animateTransform attributeName="transform" type="translate"
-                from="0,0" to="-1440,0" dur="26s" repeatCount="indefinite" calcMode="linear" />
-            </>
+            <animate
+              attributeName="d"
+              dur="10s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              keyTimes="0;0.5;1"
+              values="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z; M -50 200 C 240 145, 540 255, 820 200 S 1280 145, 1500 210 L 1500 290 C 1280 345, 820 255, 540 305 S 240 265, -50 290 Z; M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z"
+            />
           )}
-        </g>
+        </path>
 
-        {/* Cream/yellow wave — flows left → right at 30s */}
-        <g style={{ willChange: reducedMotion ? 'auto' : 'transform' }}>
-          <path d="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z" fill="url(#band3)" opacity="0.55" />
+        {/* Orange/peach wave — opposite rhythm, 13s cycle */}
+        <path
+          d="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z"
+          fill="url(#band2)" opacity="0.5"
+        >
           {!reducedMotion && (
-            <>
-              <path d="M 1390 640 C 1700 580, 2000 700, 2300 630 S 2720 570, 2940 650 L 2940 800 L 1390 800 Z" fill="url(#band3)" opacity="0.55" />
-              <path d="M 2830 640 C 3140 580, 3440 700, 3740 630 S 4160 570, 4380 650 L 4380 800 L 2830 800 Z" fill="url(#band3)" opacity="0.55" />
-              <animateTransform attributeName="transform" type="translate"
-                from="-1440,0" to="0,0" dur="30s" repeatCount="indefinite" calcMode="linear" />
-            </>
+            <animate
+              attributeName="d"
+              dur="13s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              keyTimes="0;0.5;1"
+              values="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z; M -50 420 C 260 375, 560 465, 860 410 S 1280 365, 1500 430 L 1500 510 C 1280 565, 860 485, 560 525 S 260 495, -50 510 Z; M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z"
+            />
           )}
-        </g>
+        </path>
+
+        {/* Cream/yellow wave — gentle swell, 17s cycle */}
+        <path
+          d="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z"
+          fill="url(#band3)" opacity="0.55"
+        >
+          {!reducedMotion && (
+            <animate
+              attributeName="d"
+              dur="17s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+              keyTimes="0;0.5;1"
+              values="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z; M -50 640 C 260 592, 560 688, 860 630 S 1280 582, 1500 650 L 1500 800 L -50 800 Z; M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z"
+            />
+          )}
+        </path>
       </svg>
 
       {/* Soft top-edge fade so nav blends in */}
