@@ -183,7 +183,7 @@ const Hero = ({ scrollY }) => {
           {!reducedMotion && (
             <animate
               attributeName="d"
-              dur="10s"
+              dur="8s"
               repeatCount="indefinite"
               calcMode="spline"
               keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
@@ -201,7 +201,7 @@ const Hero = ({ scrollY }) => {
           {!reducedMotion && (
             <animate
               attributeName="d"
-              dur="13s"
+              dur="9s"
               repeatCount="indefinite"
               calcMode="spline"
               keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
@@ -219,7 +219,7 @@ const Hero = ({ scrollY }) => {
           {!reducedMotion && (
             <animate
               attributeName="d"
-              dur="17s"
+              dur="10s"
               repeatCount="indefinite"
               calcMode="spline"
               keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
