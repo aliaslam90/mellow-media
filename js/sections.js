@@ -795,10 +795,10 @@ const Promise = () => (
       <WavyStripes opacity={1} />
     </div>
 
-    <Sparkle size={48} color="#FFF1D4" style={{ position: 'absolute', top: '20%', left: '8%', animation: 'twinkle 3s ease-in-out infinite' }} />
-    <Sparkle size={36} color="#FFF1D4" style={{ position: 'absolute', bottom: '24%', right: '10%', animation: 'twinkle 3.5s ease-in-out infinite 0.6s' }} />
-    <StarSparkle size={28} color="#FBDCE3" style={{ position: 'absolute', top: '32%', right: '18%' }} />
-    <StarSparkle size={22} color="#FFF1D4" style={{ position: 'absolute', bottom: '32%', left: '20%' }} />
+    <Sparkle size={48} color="#FFF1D4" className="mm-star-glow" style={{ position: 'absolute', top: '20%', left: '8%', animation: 'twinkle 3s ease-in-out infinite' }} />
+    <Sparkle size={36} color="#FFF1D4" className="mm-star-glow" style={{ position: 'absolute', bottom: '24%', right: '10%', animation: 'twinkle 3.5s ease-in-out infinite 0.6s' }} />
+    <StarSparkle size={28} color="#FBDCE3" className="mm-star-glow" style={{ position: 'absolute', top: '32%', right: '18%', animation: 'twinkle 2.8s ease-in-out infinite 0.3s' }} />
+    <StarSparkle size={22} color="#FFF1D4" className="mm-star-glow" style={{ position: 'absolute', bottom: '32%', left: '20%', animation: 'twinkle 3.2s ease-in-out infinite 1s' }} />
     <GroovyFlower size={48} v={4} style={{ position: 'absolute', top: 36, right: '32%' }} />
     <GroovyFlower size={36} v={1} style={{ position: 'absolute', bottom: 36, left: '36%' }} />
     <Mushroom size={72} cap="#FFF1D4" stem="#FBDCE3" spot="#F1732D" shade="#A84E0A" style={{ position: 'absolute', bottom: 26, right: 60, opacity: 0.85 }} />
