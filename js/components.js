@@ -149,7 +149,7 @@ const DiscoBall = ({ size = 260, scrollY = 0, dropMax = 90, stringLength }) => {
       <div style={{
         position: 'absolute', inset: 0,
         transformOrigin: 'top center',
-        animation: reduce ? 'none' : 'discoSwing 5.5s ease-in-out infinite',
+        animation: reduce ? 'none' : 'discoSwing 3.8s ease-in-out infinite',
       }}>
         {/* String */}
         <div

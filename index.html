@@ -16,14 +16,15 @@
 </head>
 <body>
 
-  <!-- Loading screen — plays logo animation, then fades out -->
+  <!-- Loading screen — plays logo animation, then the logo flies into the navbar -->
   <div id="loader" style="
     position: fixed; inset: 0; z-index: 100000;
-    background: linear-gradient(180deg, #3A2618 0%, #1f140a 100%);
+    background: #FFFFFF;
     display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.7s ease;
   ">
     <video id="loader-video" autoplay muted playsinline
+      src="assets/video/loading.mp4"
       style="width: min(70vw, 420px); height: auto;">
     </video>
   </div>
@@ -31,24 +32,57 @@
     (function () {
       var loader = document.getElementById('loader');
       var video  = document.getElementById('loader-video');
-
-      // Transparent WebM on the dark background where supported;
-      // otherwise fall back to the original mp4 on white so the
-      // video's own white background blends in.
-      if (video.canPlayType('video/webm; codecs="vp9"')) {
-        video.src = 'assets/video/loading.webm';
-      } else {
-        video.src = 'assets/video/loading.mp4';
-        loader.style.background = '#FFFFFF';
-      }
       var done   = false;
+
+      // Simple fade-out (fallback path: errors, timeout, reduced motion)
       function hide() {
         if (done) return;
         done = true;
         loader.style.opacity = '0';
-        setTimeout(function () { loader.remove(); }, 650);
+        setTimeout(function () { loader.remove(); }, 750);
       }
-      video.addEventListener('ended', hide);
+
+      // Fancy path: logo shrinks and flies into the navbar logo slot
+      function flyToNav() {
+        if (done) return;
+        var navLogo = document.querySelector('nav img[alt="Mellow Media"]');
+        if (!navLogo) { hide(); return; }
+        var target = navLogo.getBoundingClientRect();
+        if (target.width === 0) { hide(); return; }
+        done = true;
+
+        // Replace the video with the actual logo image, centred where the video was
+        var img = document.createElement('img');
+        img.src = 'assets/images/logo.png';
+        var startW = Math.min(window.innerWidth * 0.5, 320);
+        img.style.cssText =
+          'position: fixed; z-index: 100001; width: ' + startW + 'px; height: auto;' +
+          'left: ' + ((window.innerWidth - startW) / 2) + 'px;' +
+          'top: 50%; transform: translateY(-50%);' +
+          'transition: left 0.8s cubic-bezier(.4, 0, .2, 1), top 0.8s cubic-bezier(.4, 0, .2, 1),' +
+          ' width 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);';
+        document.body.appendChild(img);
+        video.style.visibility = 'hidden';
+
+        // Fade the white backdrop while the logo flies
+        loader.style.opacity = '0';
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            img.style.left  = target.left + 'px';
+            img.style.top   = target.top + 'px';
+            img.style.width = target.width + 'px';
+            img.style.transform = 'translateY(0)';
+          });
+        });
+
+        setTimeout(function () {
+          img.remove();
+          loader.remove();
+        }, 850);
+      }
+
+      video.addEventListener('ended', flyToNav);
       video.addEventListener('error', hide);
       // Safety net: never block the site for more than 6s
       setTimeout(hide, 6000);

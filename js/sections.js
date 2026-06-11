@@ -858,7 +858,11 @@ const PackageCard = ({ pkg, idx }) => {
 };
 
 // ============== PROMISE BAND ==============
-const Promise = () => (
+const Promise = () => {
+  const reducedMotion = typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  return (
   <section style={{
     position: 'relative',
     background: 'linear-gradient(135deg, #F78762 0%, #F1732D 45%, #EA829A 100%)',
@@ -871,6 +875,80 @@ const Promise = () => (
     }}>
       <WavyStripes opacity={1} />
     </div>
+
+    {/* Rolling wave bands — same motion as the hero, light overlay tint */}
+    <svg
+      viewBox="0 0 1440 800"
+      preserveAspectRatio="xMidYMid slice"
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.3, pointerEvents: 'none', mixBlendMode: 'screen' }}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="promBand1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#FBC2A4" />
+          <stop offset="100%" stopColor="#F78762" />
+        </linearGradient>
+        <linearGradient id="promBand2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#FBDCE3" />
+          <stop offset="100%" stopColor="#EA829A" />
+        </linearGradient>
+        <linearGradient id="promBand3" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#FFE7C2" />
+          <stop offset="100%" stopColor="#E9BE6A" />
+        </linearGradient>
+      </defs>
+
+      <path
+        d="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z"
+        fill="url(#promBand1)" opacity="0.55"
+      >
+        {!reducedMotion && (
+          <animate
+            attributeName="d"
+            dur="5s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+            keyTimes="0;0.5;1"
+            values="M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z; M -50 200 C 240 270, 540 130, 820 200 S 1280 270, 1500 210 L 1500 290 C 1280 240, 820 360, 540 320 S 240 330, -50 290 Z; M -50 200 C 240 130, 540 270, 820 200 S 1280 130, 1500 210 L 1500 290 C 1280 360, 820 240, 540 320 S 240 250, -50 290 Z"
+          />
+        )}
+      </path>
+
+      <path
+        d="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z"
+        fill="url(#promBand2)" opacity="0.5"
+      >
+        {!reducedMotion && (
+          <animate
+            attributeName="d"
+            dur="6s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+            keyTimes="0;0.5;1"
+            values="M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z; M -50 420 C 260 470, 560 350, 860 410 S 1280 480, 1500 430 L 1500 510 C 1280 440, 860 550, 560 540 S 260 540, -50 510 Z; M -50 420 C 260 360, 560 480, 860 410 S 1280 350, 1500 430 L 1500 510 C 1280 580, 860 470, 560 540 S 260 480, -50 510 Z"
+          />
+        )}
+      </path>
+
+      <path
+        d="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z"
+        fill="url(#promBand3)" opacity="0.55"
+      >
+        {!reducedMotion && (
+          <animate
+            attributeName="d"
+            dur="7s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+            keyTimes="0;0.5;1"
+            values="M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z; M -50 640 C 260 700, 560 580, 860 630 S 1280 710, 1500 650 L 1500 800 L -50 800 Z; M -50 640 C 260 580, 560 700, 860 630 S 1280 570, 1500 650 L 1500 800 L -50 800 Z"
+          />
+        )}
+      </path>
+    </svg>
 
     <Sparkle size={48} color="#FFF1D4" className="mm-star-glow" style={{ position: 'absolute', top: '20%', left: '8%', animation: 'twinkle 3s ease-in-out infinite' }} />
     <Sparkle size={36} color="#FFF1D4" className="mm-star-glow" style={{ position: 'absolute', bottom: '24%', right: '10%', animation: 'twinkle 3.5s ease-in-out infinite 0.6s' }} />
@@ -908,7 +986,8 @@ const Promise = () => (
       </p>
     </div>
   </section>
-);
+  );
+};
 
 // ============== TESTIMONIALS (3-up sliding carousel) ==============
 const TestimonialCard = ({ t, i }) => (
