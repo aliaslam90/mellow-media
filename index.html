@@ -25,13 +25,22 @@
   ">
     <video id="loader-video" autoplay muted playsinline
       style="width: min(70vw, 420px); height: auto;">
-      <source src="assets/video/loading.mp4" type="video/mp4">
     </video>
   </div>
   <script>
     (function () {
       var loader = document.getElementById('loader');
       var video  = document.getElementById('loader-video');
+
+      // Transparent WebM on the dark background where supported;
+      // otherwise fall back to the original mp4 on white so the
+      // video's own white background blends in.
+      if (video.canPlayType('video/webm; codecs="vp9"')) {
+        video.src = 'assets/video/loading.webm';
+      } else {
+        video.src = 'assets/video/loading.mp4';
+        loader.style.background = '#FFFFFF';
+      }
       var done   = false;
       function hide() {
         if (done) return;
