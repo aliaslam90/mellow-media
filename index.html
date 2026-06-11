@@ -16,6 +16,38 @@
 </head>
 <body>
 
+  <!-- Loading screen — plays logo animation, then fades out -->
+  <div id="loader" style="
+    position: fixed; inset: 0; z-index: 100000;
+    background: linear-gradient(180deg, #3A2618 0%, #1f140a 100%);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.6s ease;
+  ">
+    <video id="loader-video" autoplay muted playsinline
+      style="width: min(70vw, 420px); height: auto;">
+      <source src="assets/video/loading.mp4" type="video/mp4">
+    </video>
+  </div>
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      var video  = document.getElementById('loader-video');
+      var done   = false;
+      function hide() {
+        if (done) return;
+        done = true;
+        loader.style.opacity = '0';
+        setTimeout(function () { loader.remove(); }, 650);
+      }
+      video.addEventListener('ended', hide);
+      video.addEventListener('error', hide);
+      // Safety net: never block the site for more than 6s
+      setTimeout(hide, 6000);
+      // Reduced motion: skip straight to content
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) hide();
+    })();
+  </script>
+
   <div id="root"></div>
 
   <!-- React + Babel (CDN) -->
