@@ -22,10 +22,10 @@ const HangingBalls = ({ scrolled }) => {
   // attaches to the nav so we anchor a hair below the nav bottom.
   const topOffset = scrolled ? 100 : 124;
 
-  // Match the original hero ball sizes & string lengths
-  const mainSize   = isNarrow ? 150 : isMid ? 190 : 230;
+  // Ball sizes scale gently with viewport width (230px at 1920 down to ~175px at 960)
+  const mainSize   = Math.round(Math.min(230, Math.max(175, vw * 0.12)));
   const mainString = isNarrow ? 60  : 120;
-  const smallSize    = isMid ? 110 : 130;
+  const smallSize    = Math.round(Math.min(130, Math.max(100, vw * 0.068)));
   const smallString  = isMid ? 80  : 100;
 
   return (
