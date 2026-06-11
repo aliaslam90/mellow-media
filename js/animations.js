@@ -183,23 +183,25 @@
 
   /* ─── SCROLL REVEAL ─── */
   const REVEAL_CSS = `
-    .mm-reveal {
+    .mm-reveal-el {
       opacity: 0;
-      transition: opacity 0.7s ease;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.25,.8,.25,1);
+      will-change: opacity, transform;
     }
-    .mm-reveal.mm-visible {
+    .mm-reveal-el.mm-visible {
       opacity: 1;
+      transform: translateY(0);
     }
   `;
   const style = document.createElement('style');
   style.textContent = REVEAL_CSS;
   document.head.appendChild(style);
 
-  // Wait for React to render sections, then observe them
+  // Wait for React to render sections, then observe content inside them
   function attachReveal() {
-    // Target each section's direct content wrappers
     const sections = document.querySelectorAll(
-      '#about, #services, #promise, #testimonials, #contact, footer'
+      '#about, #services, #testimonials, #contact, footer'
     );
     if (sections.length === 0) {
       setTimeout(attachReveal, 200);
@@ -215,13 +217,39 @@
           }
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
 
-    sections.forEach((sec, i) => {
-      sec.classList.add('mm-reveal');
-      sec.style.transitionDelay = `${i * 0.04}s`;
-      io.observe(sec);
+    const seen = new Set();
+
+    function addTarget(el, delay) {
+      if (!el || seen.has(el)) return;
+      seen.add(el);
+      el.classList.add('mm-reveal-el');
+      el.style.transitionDelay = `${delay}s`;
+      io.observe(el);
+    }
+
+    sections.forEach((sec) => {
+      let i = 0;
+
+      // Section heading block (the wrapper around the h2: eyebrow + title + intro)
+      const h2 = sec.querySelector('h2');
+      if (h2) addTarget(h2.parentElement, 0);
+
+      // Cards / grid items reveal one after another
+      sec.querySelectorAll(
+        '.services-grid > *, .testimonials-grid > *, .about-grid > *, ' +
+        '.contact-grid > *, .footer-grid > *, .about-facts > *'
+      ).forEach((el) => addTarget(el, 0.1 + (i++) * 0.09));
+    });
+
+    // Promise band (no id) — reveal its centered quote block
+    document.querySelectorAll('section h2').forEach((h2) => {
+      const sec = h2.closest('section');
+      if (sec && !sec.id && sec.textContent.includes('professional promise')) {
+        addTarget(h2.parentElement, 0);
+      }
     });
   }
 
