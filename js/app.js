@@ -14,6 +14,9 @@ const HangingBalls = ({ scrolled }) => {
   const isNarrow = vw < 720;
   const isMid    = vw < 960;
 
+  // No hanging balls on mobile
+  if (isNarrow) return null;
+
   // Top offset matches the nav-bottom line (nav shrinks when scrolled).
   // Pre-scroll nav ≈ ~125px tall; scrolled ≈ ~100px. The string visually
   // attaches to the nav so we anchor a hair below the nav bottom.

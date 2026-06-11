@@ -289,8 +289,8 @@ const Hero = ({ scrollY }) => {
         maxWidth: 940, margin: '0 auto',
         padding: '0 28px',
         textAlign: 'center',
-        // On narrow screens the (single) ball stacks above; otherwise leave breathing room below the nav.
-        marginTop: isNarrow ? ballSize + 130 : isMid ? 70 : 80,
+        // No hanging ball on mobile — just breathing room below the nav.
+        marginTop: isNarrow ? 40 : isMid ? 70 : 80,
       }}>
         <div className="font-script" style={{
           display: 'inline-flex', alignItems: 'center', gap: 10,
@@ -454,17 +454,16 @@ const About = () => {
               linear-gradient(135deg, var(--peach-soft) 0%, var(--pink-pale) 100%)
             `,
           }}>
-            <div style={{
-              textAlign: 'center', color: 'var(--brown-mid)',
-              fontFamily: 'monospace', fontSize: 13,
-              padding: 24,
-            }}>
-              <div style={{ fontSize: 64, marginBottom: 12 }}>📷</div>
-              <div style={{ textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: 700 }}>
-                portrait of founder
-              </div>
-              <div style={{ marginTop: 6, opacity: 0.7 }}>warm, sunlit, on the couch with the cats</div>
-            </div>
+            <img
+              src="assets/images/founder.jpeg"
+              alt="Founder of Mellow Media"
+              style={{
+                width: '100%', height: '100%',
+                objectFit: 'cover', objectPosition: 'center 30%',
+                display: 'block',
+                filter: 'saturate(1.06) contrast(1.02)',
+              }}
+            />
           </div>
 
           {/* Floating decorations */}
