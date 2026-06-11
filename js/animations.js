@@ -185,12 +185,10 @@
   const REVEAL_CSS = `
     .mm-reveal {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.65s cubic-bezier(.25,.8,.25,1), transform 0.65s cubic-bezier(.25,.8,.25,1);
+      transition: opacity 0.7s ease;
     }
     .mm-reveal.mm-visible {
       opacity: 1;
-      transform: translateY(0);
     }
   `;
   const style = document.createElement('style');
