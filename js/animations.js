@@ -18,7 +18,7 @@
     dot.style.cssText = `
       position: fixed;
       pointer-events: none;
-      z-index: 99999;
+      z-index: 100003; /* above the loading screen */
       width: 14px;
       height: 14px;
       border-radius: 50%;
@@ -68,7 +68,7 @@
       img.style.cssText = `
         position: fixed;
         pointer-events: none;
-        z-index: 99998;
+        z-index: 100002; /* above the loading screen, below the dot */
         width: 18px;
         height: 18px;
         transform: translate(-50%, -50%) rotate(0deg);
@@ -150,7 +150,7 @@
       img.style.cssText = `
         position: fixed;
         pointer-events: none;
-        z-index: 99999;
+        z-index: 100002; /* visible above the loading screen too */
         width: ${size}px;
         height: ${size}px;
         left: ${x}px;
