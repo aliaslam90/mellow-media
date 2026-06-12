@@ -2,14 +2,31 @@
 
 const { useState, useEffect } = React;
 
-// Fixed disco balls that hang from the navbar and stay there during scroll.
-const HangingBalls = ({ scrolled }) => {
+// Disco balls that hang from the navbar while scrolling, but "park" just above
+// the packages (Services) section: once they would overlap it, they anchor to
+// the page and scroll away with the content, leaving the cards unobstructed.
+const HangingBalls = ({ scrolled, scrollY }) => {
   const [vw, setVw] = useState(typeof window !== 'undefined' ? window.innerWidth : 1280);
+  const [servicesTop, setServicesTop] = useState(Infinity);
+
   useEffect(() => {
     const onResize = () => setVw(window.innerWidth);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  // Measure where the Services section starts (re-measure on resize,
+  // and once shortly after mount in case images/fonts shift layout).
+  useEffect(() => {
+    const measure = () => {
+      const svc = document.getElementById('services');
+      if (svc) setServicesTop(svc.getBoundingClientRect().top + window.scrollY);
+    };
+    measure();
+    const t = setTimeout(measure, 800);
+    window.addEventListener('resize', measure);
+    return () => { clearTimeout(t); window.removeEventListener('resize', measure); };
+  }, [vw]);
 
   const isNarrow = vw < 720;
   const isMid    = vw < 960;
@@ -29,32 +46,75 @@ const HangingBalls = ({ scrolled }) => {
   const smallString  = isMid ? 80  : 100;
 
   return (
-    <>
-      {/* Smaller ball — upper left (hidden on mobile) */}
-      {!isNarrow && (
-        <div style={{
-          position: 'fixed',
-          top: topOffset,
-          left: isMid ? '9%' : '10%',
-          transform: 'translateX(-50%)',
-          zIndex: 50,
-          pointerEvents: 'none',
-          transition: 'top 0.3s ease',
-        }}>
-          <DiscoBall
-            size={smallSize}
-            scrollY={0}
-            dropMax={0}
-            stringLength={smallString}
-          />
-        </div>
-      )}
+    <BallLayer
+      topOffset={topOffset}
+      servicesTop={servicesTop}
+      isMid={isMid}
+      mainSize={mainSize} mainString={mainString}
+      smallSize={smallSize} smallString={smallString}
+    />
+  );
+};
 
-      {/* Main ball — right side (centered on mobile) */}
-      <div style={{
+// Renders the two balls and moves them imperatively on scroll (no React
+// re-render per frame) so the parking effect stays perfectly smooth.
+const BallLayer = ({ topOffset, servicesTop, isMid, mainSize, mainString, smallSize, smallString }) => {
+  const smallRef = React.useRef(null);
+  const mainRef  = React.useRef(null);
+
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const y = window.scrollY;
+      // A ball parks when its bottom would touch the Services section top.
+      const shift = (size, stringLen) => {
+        const ballBottom = topOffset + stringLen + size + 16;
+        return Math.max(0, y - (servicesTop - ballBottom));
+      };
+      if (smallRef.current) {
+        smallRef.current.style.transform =
+          `translateX(-50%) translateY(${-shift(smallSize, smallString)}px)`;
+      }
+      if (mainRef.current) {
+        mainRef.current.style.transform =
+          `translateX(-50%) translateY(${-shift(mainSize, mainString)}px)`;
+      }
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [topOffset, servicesTop, mainSize, mainString, smallSize, smallString]);
+
+  return (
+    <>
+      {/* Smaller ball — upper left */}
+      <div ref={smallRef} style={{
         position: 'fixed',
         top: topOffset,
-        left: isNarrow ? '50%' : isMid ? '90%' : '91%',
+        left: isMid ? '9%' : '10%',
+        transform: 'translateX(-50%)',
+        zIndex: 50,
+        pointerEvents: 'none',
+        transition: 'top 0.3s ease',
+      }}>
+        <DiscoBall
+          size={smallSize}
+          scrollY={0}
+          dropMax={0}
+          stringLength={smallString}
+        />
+      </div>
+
+      {/* Main ball — right side */}
+      <div ref={mainRef} style={{
+        position: 'fixed',
+        top: topOffset,
+        left: isMid ? '90%' : '91%',
         transform: 'translateX(-50%)',
         zIndex: 50,
         pointerEvents: 'none',
@@ -86,7 +146,7 @@ const App = () => {
   return (
     <>
       <Nav scrolled={scrollY > 40} />
-      <HangingBalls scrolled={scrollY > 40} />
+      <HangingBalls scrolled={scrollY > 40} scrollY={scrollY} />
       <div style={{
         opacity: loaded ? 1 : 0,
         transform: loaded ? 'translateY(0)' : 'translateY(20px)',

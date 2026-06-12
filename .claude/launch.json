@@ -2,10 +2,43 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "belmonte",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "-l",
+        "4173",
+        "/Users/aliaslam/Desktop/belmonte-build"
+      ],
+      "port": 4173
+    },
+    {
       "name": "mellow-media",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3456", "."],
+      "runtimeArgs": [
+        "serve",
+        "-l",
+        "3456",
+        "."
+      ],
       "port": 3456
+    },
+    {
+      "name": "relkoe-theme",
+      "runtimeExecutable": "shopify",
+      "runtimeArgs": [
+        "theme",
+        "dev",
+        "--store",
+        "zcbkv0-09.myshopify.com",
+        "--theme",
+        "155988230333",
+        "--path",
+        "/Users/aliaslam/Desktop/Relkoe/shopify-cursor",
+        "--port",
+        "9292"
+      ],
+      "port": 9292
     }
   ]
 }

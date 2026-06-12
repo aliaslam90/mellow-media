@@ -225,6 +225,25 @@ const DiscoBall = ({ size = 260, scrollY = 0, dropMax = 90, stringLength }) => {
   );
 };
 
+// Spinning vinyl record accent — same look as the About section disc
+const Vinyl = ({ size = 130, label = 'var(--coral)', center = 'var(--peach)', style = {}, className = '' }) => (
+  <div className={className} style={{
+    width: size, height: size,
+    borderRadius: '50%',
+    background: `radial-gradient(circle, ${label} 18%, #2C1A0E 19%, #2C1A0E 24%, #5C3D1E 25%, #5C3D1E 32%, #2C1A0E 33%, #2C1A0E 96%, var(--burnt-orange) 97%)`,
+    boxShadow: '0 18px 30px -10px rgba(44,26,14,0.4)',
+    animation: 'spinSlow 16s linear infinite',
+    position: 'relative',
+    ...style,
+  }} aria-hidden="true">
+    <div style={{
+      position: 'absolute', inset: '45%',
+      background: center, borderRadius: '50%',
+      boxShadow: '0 0 0 2px var(--espresso)',
+    }} />
+  </div>
+);
+
 // Circular brand badge — round seal with curved text + flower in the middle
 const BrandBadge = ({ size = 220, text = 'MELLOW MEDIA · SOLO SOCIAL STUDIO · EST 2025 · ', spin = true, bg = '#CE6514', textColor = '#FFF1D4' }) => (
   <div

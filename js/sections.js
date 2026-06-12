@@ -333,7 +333,7 @@ const Hero = ({ scrollY }) => {
           fontWeight: 500,
         }}>
           Social media shouldn't feel like a chore. I handle the strategy, design, posting,
-          engagement and growth — to keep your brand active and your workload mellow.
+          engagement and growth, to keep your brand active and your workload mellow.
         </p>
 
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -518,7 +518,7 @@ const About = () => {
               high-stress agency feel.
             </p>
             <p style={{ margin: '0 0 18px' }}>
-              I specialise in the essentials that keep a business humming —
+              I specialise in the essentials that keep a business humming:
               <em> clean graphic design</em>, <em>consistent scheduling</em> and
               <em> genuine community engagement</em>.
             </p>
@@ -570,10 +570,10 @@ const Services = () => {
       sub: 'For businesses just getting started with social.',
       price: '€250',
       features: [
-        '2 platforms — Instagram & Facebook',
+        '2 platforms: Instagram & Facebook',
         '3 high-quality posts per week',
         'Simple branded Canva graphics (content provided by you where needed)',
-        'Foundational engagement — replying to comments & DMs, plus a relevant hashtag strategy',
+        'Foundational engagement: replying to comments & DMs, plus a relevant hashtag strategy',
         'Monthly "pulse check" report',
       ],
     },
@@ -585,8 +585,8 @@ const Services = () => {
       features: [
         'Up to 4 platforms',
         '4+ posts per week, including short-form video & reels',
-        'Fully tailored content — custom graphics and captions written for you',
-        'Active growth — daily engagement, competitor & hashtag research, audience targeting',
+        'Fully tailored content: custom graphics and captions written for you',
+        'Active growth: daily engagement, competitor & hashtag research, audience targeting',
         'Monthly report + strategy meeting',
       ],
     },
@@ -598,7 +598,7 @@ const Services = () => {
         'Up to 6 platforms',
         '5+ posts per week, including premium reels & video',
         'Full monthly content calendar, planned and scheduled in advance',
-        'Proactive lead generation — finding, following and engaging potential customers',
+        'Proactive lead generation: finding, following and engaging potential customers',
         'Detailed weekly reports + monthly strategy meeting',
       ],
     },
@@ -722,7 +722,7 @@ const Services = () => {
             </h2>
             <p style={{ margin: 0, fontSize: 19, color: 'var(--deep-brown)', maxWidth: 580, marginInline: 'auto', fontWeight: 500 }}>
               Three packages, designed to meet you wherever your brand happens to be.
-              Mix, match, or take a different shape — we'll figure it out on the call.
+              Mix, match, or take a different shape, we'll figure it out on the call.
             </p>
           </div>
 
@@ -741,7 +741,7 @@ const Services = () => {
             display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', width: '100%',
           }}>
             <GroovyFlower size={16} v={3} />
-            Pricing finalised on the discovery call — every business needs slightly different things.
+            Pricing finalised on the discovery call, every business needs slightly different things.
             <GroovyFlower size={16} v={6} />
           </div>
         </div>
@@ -957,6 +957,10 @@ const Promise = () => {
     <GroovyFlower size={36} v={1} style={{ position: 'absolute', bottom: 36, left: '36%' }} />
     <Mushroom size={72} cap="#FFF1D4" stem="#FBDCE3" spot="#F1732D" shade="#A84E0A" style={{ position: 'absolute', bottom: 26, right: 60, opacity: 0.85 }} />
 
+    {/* Spinning vinyl accents — client favourite */}
+    <Vinyl size={170} style={{ position: 'absolute', bottom: -55, left: -45, zIndex: 1 }} />
+    <Vinyl size={92} label="#EA829A" center="#FBDCE3" style={{ position: 'absolute', top: -28, right: '14%', zIndex: 1 }} />
+
     <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 2 }}>
       <div className="font-caveat" style={{
         color: '#FFF9EF', fontSize: 28, fontWeight: 600, marginBottom: 8, opacity: 0.95,
@@ -1036,15 +1040,15 @@ const TestimonialCard = ({ t, i }) => (
 
 const Testimonials = () => {
   const items = [
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
-    { quote: 'Testimonial coming soon — watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
+    { quote: 'Testimonial coming soon, watch this space ✦', who: 'A delighted client', biz: 'Coming soon' },
   ];
 
   // How many cards visible depends on viewport
@@ -1117,7 +1121,7 @@ const Testimonials = () => {
             From the people I work with.
           </h2>
           <p style={{ margin: 0, fontSize: 17, color: 'var(--brown-mid)' }}>
-            Real quotes coming soon — these spots are warming up.
+            Real quotes coming soon, these spots are warming up.
           </p>
         </div>
 
@@ -1252,7 +1256,7 @@ const Contact = () => {
           </h2>
           <p style={{ fontSize: 19, lineHeight: 1.6, color: 'var(--brown)', maxWidth: 480 }}>
             Drop me a message and let's figure out how I can take social media off your plate.
-            I reply to every note within a working day — promise.
+            I reply to every note within a working day, promise.
           </p>
 
           <div style={{
@@ -1266,7 +1270,7 @@ const Contact = () => {
               <span style={{ fontWeight: 700, color: 'var(--espresso)' }}>Prefer to talk it out?</span>
             </div>
             <p style={{ margin: '0 0 14px', fontSize: 15, color: 'var(--brown)' }}>
-              Book a free 20-min consultation. No pitch, no pressure — just a chat about your brand.
+              Book a free 20-min consultation. No pitch, no pressure, just a chat about your brand.
             </p>
             <a href="#" className="mm-btn mm-btn-ghost" style={{ padding: '10px 18px', fontSize: 14 }}>
               <IconCalendar size={16} />
@@ -1299,7 +1303,7 @@ const Contact = () => {
                 Thanks, {form.name.split(' ')[0]}! ✦
               </h3>
               <p style={{ color: 'var(--brown)', fontSize: 16, margin: 0 }}>
-                Your note is on its way. I'll reply within a working day — keep an eye on{' '}
+                Your note is on its way. I'll reply within a working day, keep an eye on{' '}
                 <strong>{form.email}</strong>.
               </p>
               <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', biz: '', interest: '', message: '' }); }} className="mm-btn mm-btn-ghost" style={{ marginTop: 22 }}>
@@ -1322,7 +1326,7 @@ const Contact = () => {
               </button>
 
               <p style={{ marginTop: 16, fontSize: 12, color: 'var(--brown-mid)', textAlign: 'center', fontStyle: 'italic' }}>
-                Your details stay between us — I never share or sell anyone's info.
+                Your details stay between us. I never share or sell anyone's info.
               </p>
             </form>
           )}
