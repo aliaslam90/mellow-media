@@ -3,7 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mellow Media — The chill way to build a hot brand</title>
+  <title>Mellow Media | Social Media Management for Small Brands, Dubai</title>
+
+  <!-- Primary SEO -->
+  <meta name="description" content="Mellow Media is a solo social media studio in Dubai. Strategy, content design, posting, engagement and growth for small brands, from €250/month. Book a free chat.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Mellow Media">
+  <link rel="canonical" href="https://mellow-media.vercel.app/">
+  <meta name="theme-color" content="#FFF1D4">
+  <link rel="icon" type="image/svg+xml" href="assets/flowers/flower-1.svg">
+  <link rel="apple-touch-icon" href="assets/flowers/flower-1.svg">
+
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mellow-media.vercel.app/">
+  <meta property="og:title" content="Mellow Media | The chill way to build a hot brand">
+  <meta property="og:description" content="Social media shouldn't feel like a chore. Strategy, design, posting, engagement and growth for small brands, from €250/month.">
+  <meta property="og:image" content="https://mellow-media.vercel.app/assets/images/logo.png">
+  <meta property="og:site_name" content="Mellow Media">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mellow Media | The chill way to build a hot brand">
+  <meta name="twitter:description" content="Social media shouldn't feel like a chore. Strategy, design, posting, engagement and growth for small brands, from €250/month.">
+  <meta name="twitter:image" content="https://mellow-media.vercel.app/assets/images/logo.png">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Mellow Media",
+    "description": "Solo social media studio handling strategy, content design, posting, engagement and growth for small brands.",
+    "url": "https://mellow-media.vercel.app/",
+    "logo": "https://mellow-media.vercel.app/assets/images/logo.png",
+    "image": "https://mellow-media.vercel.app/assets/images/logo.png",
+    "slogan": "The chill way to build a hot brand",
+    "areaServed": "Worldwide",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressCountry": "AE"
+    },
+    "priceRange": "€250 - €950 / month",
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "name": "Mellow Basics",
+        "description": "2 platforms, 3 posts per week, branded graphics, engagement and monthly report.",
+        "price": "250",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Mellow Flow",
+        "description": "Up to 4 platforms, 4+ posts per week including reels, tailored content, daily engagement, monthly strategy meeting.",
+        "price": "600",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Totally Mellow",
+        "description": "Up to 6 platforms, 5+ posts per week including premium video, full content calendar, lead generation, weekly reports.",
+        "price": "950",
+        "priceCurrency": "EUR"
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,10 +150,13 @@
         }, 850);
       }
 
+      // Play the animation at 2x so the loader lasts ~2.5s instead of 5s
+      video.playbackRate = 2;
+
       video.addEventListener('ended', flyToNav);
       video.addEventListener('error', hide);
-      // Safety net: never block the site for more than 6s
-      setTimeout(hide, 6000);
+      // Safety net: never block the site for more than 4s
+      setTimeout(hide, 4000);
       // Reduced motion: skip straight to content
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) hide();
     })();
